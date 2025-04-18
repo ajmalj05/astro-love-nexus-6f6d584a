@@ -44,13 +44,7 @@ export default function Dashboard({ activeTab = "horoscope" }: DashboardProps) {
                 <Info className="h-4 w-4" />
                 <span>About</span>
               </Link>
-              <Link
-                to="/profile"
-                className="text-sm text-cosmic-lavender hover:text-cosmic-gold transition-colors flex items-center gap-1"
-              >
-                <FileText className="h-4 w-4" />
-                <span>My Readings</span>
-              </Link>
+              
               <Link
                 to="/profile"
                 className="text-sm text-cosmic-lavender hover:text-cosmic-gold transition-colors flex items-center gap-1"
