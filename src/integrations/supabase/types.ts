@@ -9,6 +9,66 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      compatibility_readings: {
+        Row: {
+          compatibility_score: number | null
+          created_at: string | null
+          id: string
+          person1_birthdate: string
+          person1_name: string
+          person2_birthdate: string
+          person2_name: string
+          reading_content: string
+          user_id: string
+        }
+        Insert: {
+          compatibility_score?: number | null
+          created_at?: string | null
+          id?: string
+          person1_birthdate: string
+          person1_name: string
+          person2_birthdate: string
+          person2_name: string
+          reading_content: string
+          user_id: string
+        }
+        Update: {
+          compatibility_score?: number | null
+          created_at?: string | null
+          id?: string
+          person1_birthdate?: string
+          person1_name?: string
+          person2_birthdate?: string
+          person2_name?: string
+          reading_content?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      horoscope_readings: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          reading_type: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          reading_type: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          reading_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null

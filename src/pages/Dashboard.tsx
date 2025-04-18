@@ -3,15 +3,15 @@ import { useState } from "react";
 import { useUser } from "@/contexts/UserContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { 
   LogOut, 
   Moon, 
   Stars, 
-  Sun, 
   UserCircle, 
-  Users, 
-  CalendarDays, 
-  Heart
+  Heart,
+  FileText,
+  Info
 } from "lucide-react";
 import HoroscopeForm from "@/components/horoscope/HoroscopeForm";
 import CompatibilityForm from "@/components/compatibility/CompatibilityForm";
@@ -35,6 +35,22 @@ export default function Dashboard({ activeTab = "horoscope" }: DashboardProps) {
           </div>
           
           <div className="flex items-center gap-4">
+            <nav className="hidden md:flex items-center gap-4">
+              <Link
+                to="/about"
+                className="text-sm hover:text-cosmic-gold transition-colors flex items-center gap-1"
+              >
+                <Info className="h-4 w-4" />
+                <span>About</span>
+              </Link>
+              <Link
+                to="/profile"
+                className="text-sm hover:text-cosmic-gold transition-colors flex items-center gap-1"
+              >
+                <FileText className="h-4 w-4" />
+                <span>My Readings</span>
+              </Link>
+            </nav>
             <div className="flex items-center gap-2">
               <UserCircle className="h-5 w-5 text-muted-foreground" />
               <span className="text-sm hidden sm:inline-block">{user?.email}</span>
