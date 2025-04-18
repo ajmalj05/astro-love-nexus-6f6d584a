@@ -52,6 +52,14 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+        cosmic: {
+          purple: '#2D1B69',
+          blue: '#1A1A40',
+          accent: '#9370DB',
+          gold: '#FFD700',
+          lavender: '#E6E6FA',
+          pink: '#F8B8D3',
+        },
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
