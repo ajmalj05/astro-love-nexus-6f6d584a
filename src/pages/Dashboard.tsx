@@ -37,7 +37,7 @@ export default function Dashboard({ activeTab = "horoscope" }: DashboardProps) {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <UserCircle className="h-5 w-5 text-muted-foreground" />
-              <span className="text-sm hidden sm:inline-block">{user?.name || user?.email}</span>
+              <span className="text-sm hidden sm:inline-block">{user?.email}</span>
             </div>
             <Button variant="ghost" size="icon" onClick={logout} title="Log out">
               <LogOut className="h-5 w-5" />
