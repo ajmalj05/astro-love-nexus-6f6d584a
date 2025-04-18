@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Moon, Stars, Sun } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -15,13 +16,14 @@ const formSchema = z.object({
 });
 
 interface AuthFormProps {
-  onSubmit: (values: z.infer<typeof formSchema>) => void;
+  onSubmit: (values: z.infer<typeof formSchema>) => Promise<void>;
   isLogin: boolean;
   switchMode: () => void;
 }
 
 export function AuthForm({ onSubmit, isLogin, switchMode }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,8 +37,12 @@ export function AuthForm({ onSubmit, isLogin, switchMode }: AuthFormProps) {
     setIsLoading(true);
     try {
       await onSubmit(values);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Authentication error",
+        description: error?.message || "Failed to authenticate. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }

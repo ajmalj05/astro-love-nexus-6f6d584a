@@ -3,24 +3,31 @@ import { useState } from "react";
 import { AuthForm } from "@/components/auth/AuthForm";
 import { useNavigate } from "react-router-dom";
 import { Stars } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleAuthSubmit = async (values: { email: string; password: string }) => {
-    // This would integrate with a real auth system in production
-    console.log("Auth values:", values);
-    
-    // Mock successful authentication
-    localStorage.setItem("user", JSON.stringify({
-      id: "user-123",
-      email: values.email,
-      name: values.email.split("@")[0]
-    }));
-    
-    // Navigate to dashboard after auth
-    navigate("/dashboard");
+    const { error, data } = isLogin 
+      ? await supabase.auth.signInWithPassword(values)
+      : await supabase.auth.signUp(values);
+
+    if (error) {
+      throw error;
+    }
+
+    if (!isLogin && data?.user) {
+      toast({
+        title: "Account created successfully!",
+        description: "Please check your email to verify your account.",
+      });
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   return (
